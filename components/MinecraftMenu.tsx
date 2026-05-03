@@ -132,13 +132,13 @@ export default function MinecraftMenu() {
         <div className='flex flex-col items-center gap-[6px] w-[400px] max-w-[80vw]'>
           <McButton onClick={() => router.push('/projects')}>
             Singleplayer
-            <span className='absolute bottom-[4px] right-[6px] text-[10px] text-[#aaaaaa] leading-none [text-shadow:1px_1px_0px_#222] font-sans'>
+            <span className='absolute bottom-[2px] right-[6px] text-[10px] text-[#ddd] leading-none [text-shadow:1px_1px_0px_#222] font-sans opacity-50'>
               (projects)
             </span>
           </McButton>
           <McButton onClick={() => router.push('/contact')}>
             Multiplayer
-            <span className='absolute bottom-[4px] right-[6px] text-[10px] text-[#aaaaaa] leading-none [text-shadow:1px_1px_0px_#222] font-sans'>
+            <span className='absolute bottom-[2px] right-[6px] text-[10px] text-[#ddd] leading-none [text-shadow:1px_1px_0px_#222] font-sans opacity-50'>
               (contacts)
             </span>
           </McButton>

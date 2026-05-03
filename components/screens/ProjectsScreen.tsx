@@ -157,6 +157,9 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
           <div className='flex flex-1'>
             <McButton className='w-full h-[40px]' disabled={!selected} onClick={handlePlay}>
               Play&nbsp;&nbsp;Selected&nbsp;&nbsp;World
+              <span className='absolute bottom-[-4px] right-[6px] text-[10px] text-[#aaaaaa] leading-none [text-shadow:1px_1px_0px_#222] font-sans opacity-40'>
+                (more info)
+              </span>
             </McButton>
           </div>
           <div className='flex flex-1'>
@@ -176,7 +179,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
           </div>
           <div className='flex gap-[4px] flex-1'>
             <McButton className='flex-1 w-auto h-[40px]' disabled>
-              More&nbsp;&nbsp;Info
+              Re-Create
             </McButton>
             <McButton className='flex-1 w-auto h-[40px]' onClick={onBack}>
               Back
