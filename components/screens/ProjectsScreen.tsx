@@ -24,13 +24,22 @@ const PROJECTS: Project[] = [
     gameMode: 'Survival Mode',
   },
   {
+    id: 'ai-image-search',
+    name: 'AI Image Search',
+    description: 'Semantic vector-based image retrieval',
+    version: 'Gemini / Next.js / Pinecone',
+    updatedAt: 'April 28, 2026',
+    url: 'https://images.arturlys.com',
+    gameMode: 'Creative Mode',
+  },
+  {
     id: 'ai-rpg',
     name: 'Legend of AI',
     description: 'Endless AI-generated RPG world',
     version: 'Three.js / OpenAI / Node',
     updatedAt: 'April 15, 2026',
     url: 'https://ai-rpg.arturlys.com',
-    gameMode: 'Creative Mode',
+    gameMode: 'Adventure Mode',
   },
   {
     id: 'portfolio',
@@ -40,42 +49,6 @@ const PROJECTS: Project[] = [
     updatedAt: 'May 3, 2026',
     url: '#',
     gameMode: 'Hardcore Mode',
-  },
-  {
-    id: 'dummy1',
-    name: 'New World',
-    description: 'Creative Mode, Commands, Experimental, Versi...',
-    version: 'Version: 1.21.11',
-    updatedAt: '12/22/25, 9:45 AM',
-    url: '#',
-    gameMode: 'Creative Mode',
-  },
-  {
-    id: 'dummy2',
-    name: 'New World (1)',
-    description: 'Hardcore Mode, Version: 1.21.11',
-    version: 'Version: 1.21.11',
-    updatedAt: '12/22/25, 9:46 AM',
-    url: '#',
-    gameMode: 'Hardcore Mode',
-  },
-  {
-    id: 'dummy3',
-    name: 'Mundo nuevo',
-    description: 'Survival Mode, Version: 1.21.5',
-    version: 'Version: 1.21.5',
-    updatedAt: '3/28/26, 5:11 PM',
-    url: '#',
-    gameMode: 'Survival Mode',
-  },
-  {
-    id: 'dummy4',
-    name: 'New WorldJ',
-    description: 'Survival Mode, Version: 1.21.5',
-    version: 'Version: 1.21.5',
-    updatedAt: '12/18/25, 12:37 PM',
-    url: '#',
-    gameMode: 'Survival Mode',
   },
 ]
 
@@ -187,7 +160,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
             </McButton>
           </div>
           <div className='flex flex-1'>
-            <McButton className='w-full h-[40px]' onClick={() => alert('Coming soon!')}>
+            <McButton className='w-full h-[40px]' disabled>
               Create&nbsp;&nbsp;New&nbsp;&nbsp;World
             </McButton>
           </div>
@@ -202,16 +175,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
             </McButton>
           </div>
           <div className='flex gap-[4px] flex-1'>
-            <McButton
-              className='flex-1 w-auto h-[40px]'
-              disabled={!selected}
-              onClick={() => {
-                const project = PROJECTS.find((p) => p.id === selected)
-                if (project) {
-                  alert(`${project.name}\n\nStack: ${project.version}\nMode: ${project.gameMode}\n\n${project.description}`)
-                }
-              }}
-            >
+            <McButton className='flex-1 w-auto h-[40px]' disabled>
               More&nbsp;&nbsp;Info
             </McButton>
             <McButton className='flex-1 w-auto h-[40px]' onClick={onBack}>

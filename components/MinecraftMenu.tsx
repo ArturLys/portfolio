@@ -83,7 +83,7 @@ export function McButton({
         }}
       />
 
-      <span className='relative z-10 '>{children}</span>
+      <span className='relative z-10 block w-full h-full'>{children}</span>
     </button>
   )
 }
@@ -94,7 +94,12 @@ export default function MinecraftMenu() {
 
   useEffect(() => {
     setSplash(SPLASH_TEXTS[Math.floor(Math.random() * SPLASH_TEXTS.length)])
-  }, [])
+
+    router.prefetch('/projects')
+    router.prefetch('/contact')
+    router.prefetch('/achievements')
+    router.prefetch('/about')
+  }, [router])
 
   return (
     <div className='absolute inset-0 z-10 flex flex-col items-center justify-center'>
@@ -125,8 +130,18 @@ export default function MinecraftMenu() {
         </div>
 
         <div className='flex flex-col items-center gap-[6px] w-[400px] max-w-[80vw]'>
-          <McButton onClick={() => router.push('/projects')}>Singleplayer</McButton>
-          <McButton onClick={() => router.push('/contact')}>Multiplayer</McButton>
+          <McButton onClick={() => router.push('/projects')}>
+            Singleplayer
+            <span className='absolute bottom-[4px] right-[6px] text-[10px] text-[#aaaaaa] leading-none [text-shadow:1px_1px_0px_#222] font-sans'>
+              (projects)
+            </span>
+          </McButton>
+          <McButton onClick={() => router.push('/contact')}>
+            Multiplayer
+            <span className='absolute bottom-[4px] right-[6px] text-[10px] text-[#aaaaaa] leading-none [text-shadow:1px_1px_0px_#222] font-sans'>
+              (contacts)
+            </span>
+          </McButton>
           <McButton onClick={() => router.push('/achievements')}>Advancements</McButton>
 
           <div className='h-[12px]' />

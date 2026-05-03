@@ -512,12 +512,10 @@ export default function AdvancementsScreen({ onBack }: { onBack: () => void }) {
               onScroll={() => setHoveredTooltip(null)} // Hide tooltip when scrolling
             >
               <div
-                className='relative'
+                className='relative scale-100 md:scale-150 origin-top-left transition-transform'
                 style={{
                   width: `${maxX + 66}px`, // ~100px buffer when scaled by 1.5
                   height: `${Math.max(maxY + 66, 260)}px`, // Ensure some minimum height
-                  transform: 'scale(1.5)',
-                  transformOrigin: 'top left',
                 }}
               >
                 {/* 1. Draw Black Bases for Connection Lines */}
@@ -654,12 +652,10 @@ export default function AdvancementsScreen({ onBack }: { onBack: () => void }) {
           {/* Tooltip - Fixed portal-like rendering to escape overflow and handle z-layering */}
           {hoveredTooltip && (
             <div
-              className='fixed z-[9999] pointer-events-none font-minecraft'
+              className='fixed z-[9999] pointer-events-none font-minecraft scale-100 md:scale-150 origin-top-left'
               style={{
                 left: hoveredTooltip.x,
                 top: hoveredTooltip.y,
-                transform: 'scale(1.5)',
-                transformOrigin: 'top left',
               }}
             >
               {/* Tooltip Background/Text Box */}

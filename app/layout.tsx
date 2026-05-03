@@ -15,6 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
+      <head>
+        <link rel="preload" href="/textures/ui/button.png" as="image" />
+        <link rel="preload" href="/textures/ui/button_highlighted.png" as="image" />
+        <link rel="preload" href="/textures/ui/button_disabled.png" as="image" />
+        <link rel="preload" href="/title.png" as="image" />
+      </head>
       <body className="h-full flex flex-col bg-black font-minecraft overflow-hidden antialiased text-white">
         <AppWrapper>
           {children}
