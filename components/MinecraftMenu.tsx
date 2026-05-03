@@ -22,7 +22,7 @@ function playClick() {
   if (typeof window === 'undefined') return
   if (!clickAudio) {
     clickAudio = new Audio('/sounds/click.ogg')
-    clickAudio.volume = 0.6
+    clickAudio.volume = 0.1
   }
   clickAudio.currentTime = 0
   clickAudio.play().catch(() => {})
@@ -71,10 +71,8 @@ export function McButton({
       }}
     >
       {/* Dark blue tint overlay for disabled buttons */}
-      {disabled && (
-        <div className="absolute inset-[-4px] pointer-events-none bg-[#0a1a2a]/40 mix-blend-multiply" />
-      )}
-      
+      {disabled && <div className='absolute inset-[-4px] pointer-events-none bg-[#0a1a2a]/40 mix-blend-multiply' />}
+
       {/* Hover overlay — only shows for non-disabled via group-hover (group class only added when not disabled) */}
       <div
         className='absolute inset-[-4px] pointer-events-none hidden group-hover:block'
@@ -113,32 +111,28 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
 
       {/* Menu */}
       <div className='flex flex-col items-center justify-center relative'>
-        
         {/* SVG Title */}
-        <svg 
-          viewBox="0 0 600 120" 
-          className="w-[500px] max-w-[90vw] h-auto mb-10 select-none overflow-visible"
-        >
+        <svg viewBox='0 0 600 120' className='w-[500px] max-w-[90vw] h-auto mb-10 select-none overflow-visible'>
           <defs>
-            <linearGradient id="mc-text" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="100%" stopColor="#aaaaaa" />
+            <linearGradient id='mc-text' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='0%' stopColor='#ffffff' />
+              <stop offset='100%' stopColor='#aaaaaa' />
             </linearGradient>
-            <filter id="mc-shadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="4" dy="4" stdDeviation="0" floodColor="#111111" floodOpacity="1" />
+            <filter id='mc-shadow' x='-10%' y='-10%' width='120%' height='120%'>
+              <feDropShadow dx='4' dy='4' stdDeviation='0' floodColor='#111111' floodOpacity='1' />
             </filter>
           </defs>
-          <text 
-            x="50%" 
-            y="50%" 
-            dominantBaseline="middle" 
-            textAnchor="middle" 
-            className="font-minecraft text-[64px] tracking-[4px]"
-            fill="url(#mc-text)"
-            stroke="#222"
-            strokeWidth="3"
-            strokeLinejoin="miter"
-            filter="url(#mc-shadow)"
+          <text
+            x='50%'
+            y='50%'
+            dominantBaseline='middle'
+            textAnchor='middle'
+            className='font-minecraft text-[64px] tracking-[4px]'
+            fill='url(#mc-text)'
+            stroke='#222'
+            strokeWidth='3'
+            strokeLinejoin='miter'
+            filter='url(#mc-shadow)'
           >
             ARTUR LYS
           </text>
@@ -152,7 +146,7 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
         <div className='flex flex-col items-center gap-[6px] w-[400px] max-w-[80vw]'>
           <McButton onClick={() => onNavigate('PROJECTS')}>Singleplayer</McButton>
           <McButton onClick={() => onNavigate('CONTACT')}>Multiplayer</McButton>
-          <McButton onClick={() => onNavigate('ACHIEVEMENTS')}>Achievements</McButton>
+          <McButton onClick={() => onNavigate('ACHIEVEMENTS')}>Advancements</McButton>
 
           <div className='h-[12px]' />
 
@@ -169,10 +163,10 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
 
       {/* Bottom text */}
       <div className='fixed bottom-0 left-1 font-minecraft text-[10px] text-[#aaa] [text-shadow:1px_1px_0px_#000] z-20 select-none whitespace-pre'>
-        Artur  Lys  Portfolio
+        Artur Lys Portfolio
       </div>
       <div className='fixed bottom-0 right-1 font-minecraft text-[10px] text-[#aaa] [text-shadow:1px_1px_0px_#000] z-20 select-none whitespace-pre'>
-        Next.js  16  /  Three.js
+        Next.js 16 / Three.js
       </div>
     </div>
   )

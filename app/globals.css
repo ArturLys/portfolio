@@ -35,3 +35,12 @@ button, button *, .font-minecraft {
   height: 100%;
   z-index: 0;
 }
+
+/* Scrollbar Hiding Utility */
+@utility scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
