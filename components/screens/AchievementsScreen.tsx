@@ -2,7 +2,6 @@
 
 import { useState, useRef } from 'react'
 import { McButton } from '../MinecraftMenu'
-import { Globe, Cpu, Terminal, X, Lock, Server, Database, Cloud, Activity, Braces, Sparkles, Image as ImageIcon, Wrench, Map } from 'lucide-react'
 
 interface AdvancementNode {
   id: string
@@ -17,36 +16,429 @@ interface AdvancementNode {
 }
 
 const WEB_ADVANCEMENTS: AdvancementNode[] = [
-  { id: 'html', title: 'The Foundation', description: 'HTML/CSS/JS/TS', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 40, y: 128 },
-  { id: 'react', title: 'Reactive Power', description: 'Modern React Development', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 104, y: 128, parent: 'html' },
-  { id: 'nextjs', title: 'The Next Level', description: 'Next.js App Router & SSR', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" className="w-[28px] h-[28px] invert object-contain select-none" draggable={false} />, x: 168, y: 128, parent: 'react' },
-  { id: 'node', title: 'Backend Engine', description: 'Node / Express / WebSockets', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 232, y: 64, parent: 'nextjs' },
-  { id: 'prisma', title: 'Data Smith', description: 'Prisma & PostgreSQL', icon: <img src="/icons/prisma.svg" className="w-[28px] h-[28px] invert object-contain select-none" draggable={false} />, x: 232, y: 192, parent: 'nextjs' },
+  {
+    id: 'html',
+    title: 'The Foundation',
+    description: 'HTML / CSS / JS',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 40,
+    y: 128,
+  },
+  {
+    id: 'ts',
+    title: 'Strict Types',
+    description: 'TypeScript',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 104,
+    y: 128,
+    parent: 'html',
+  },
+  {
+    id: 'react',
+    title: 'Component Era',
+    description: 'React & State Management',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 168,
+    y: 64,
+    parent: 'ts',
+  },
+  {
+    id: 'nextjs',
+    title: 'The Next Level',
+    description: 'Next.js App Router & SSR',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg'
+        className='w-[28px] h-[28px] invert object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 232,
+    y: 64,
+    parent: 'react',
+  },
+  {
+    id: 'node',
+    title: 'Backend Engine',
+    description: 'Node.js Runtime',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 168,
+    y: 192,
+    parent: 'ts',
+  },
+  {
+    id: 'express',
+    title: 'The Router',
+    description: 'Express.js',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg'
+        className='w-[28px] h-[28px] invert object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 232,
+    y: 192,
+    parent: 'node',
+  },
+  {
+    id: 'websocket',
+    title: 'Live Wire',
+    description: 'WebSockets / Socket.io',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg'
+        className='w-[28px] h-[28px] invert object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 296,
+    y: 192,
+    parent: 'express',
+  },
+  {
+    id: 'postgres',
+    title: 'Data Core',
+    description: 'PostgreSQL',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 40,
+    y: 256,
+  },
+  {
+    id: 'prisma',
+    title: 'The ORM',
+    description: 'Prisma Client',
+    icon: <img src='/icons/prisma.svg' className='w-[28px] h-[28px] invert object-contain select-none' draggable={false} />,
+    x: 104,
+    y: 256,
+    parent: 'postgres',
+  },
 ]
 
 const INFRA_ADVANCEMENTS: AdvancementNode[] = [
-  { id: 'git', title: 'Timeline Control', description: 'Git Version Control', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 40, y: 128 },
-  { id: 'linux', title: 'Kernel Access', description: 'Linux Systems & Bash', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 104, y: 128, parent: 'git' },
-  { id: 'ssh', title: 'Secure Shell', description: 'Remote Server Management', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 168, y: 128, parent: 'linux' },
-  { id: 'aws', title: 'The Cloud', description: 'AWS EC2 / S3', icon: <img src="/icons/aws-icon.webp" className="w-[28px] h-[28px] object-contain rounded-[4px] select-none" draggable={false} />, x: 232, y: 128, parent: 'ssh' },
-  { id: 'docker', title: 'Contained', description: 'Docker & Containerization', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 296, y: 128, parent: 'aws' },
-  { id: 'cicd', title: 'Continuous Delivery', description: 'CI/CD Pipelines', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 360, y: 128, parent: 'docker', locked: true },
+  {
+    id: 'git',
+    title: 'Timeline Control',
+    description: 'Git Version Control',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 40,
+    y: 40,
+  },
+  {
+    id: 'vercel',
+    title: 'Edge Deploy',
+    description: 'Vercel Deployments',
+    icon: (
+      <img
+        src='https://api.iconify.design/simple-icons:vercel.svg?color=white'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 104,
+    y: 40,
+    parent: 'git',
+  },
+  {
+    id: 'linux',
+    title: 'Kernel Access',
+    description: 'Linux Systems & Bash',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 40,
+    y: 128,
+  },
+  {
+    id: 'ssh',
+    title: 'Secure Shell',
+    description: 'Remote Server Management',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 104,
+    y: 128,
+    parent: 'linux',
+  },
+  {
+    id: 'aws',
+    title: 'Cloud Access',
+    description: 'AWS EC2 / S3',
+    icon: <img src='/icons/aws-icon.webp' className='w-[28px] h-[28px] object-contain rounded-[4px] select-none' draggable={false} />,
+    x: 168,
+    y: 128,
+    parent: 'ssh',
+  },
+  {
+    id: 'docker',
+    title: 'Contained',
+    description: 'Docker & Containerization',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 40,
+    y: 216,
+  },
+  {
+    id: 'cicd',
+    title: 'Continuous Delivery',
+    description: 'CI/CD Pipelines',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 104,
+    y: 216,
+    parent: 'docker',
+    locked: true,
+  },
 ]
 
 const AI_ADVANCEMENTS: AdvancementNode[] = [
-  { id: 'prompt', title: 'Whisperer', description: 'Advanced Prompt Design', icon: <img src="https://api.iconify.design/simple-icons:openai.svg?color=white" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 40, y: 128 },
-  { id: 'llm', title: 'Silicon Mind', description: 'LLM Integration', icon: <img src="https://api.iconify.design/simple-icons:anthropic.svg?color=white" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 104, y: 128, parent: 'prompt' },
-  { id: 'rag', title: 'Living Knowledge', description: 'RAG Pipelines', icon: <img src="https://api.iconify.design/carbon:network-4.svg?color=white" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 168, y: 64, parent: 'llm' },
-  { id: 'agents', title: 'Autonomous Units', description: 'Agentic AI Frameworks', icon: <img src="https://api.iconify.design/simple-icons:langchain.svg?color=white" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 232, y: 64, parent: 'rag', type: 'challenge' },
-  { id: 'vector', title: 'Semantic Search', description: 'Vector Databases', icon: <img src="https://api.iconify.design/logos:chroma.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 168, y: 0, parent: 'rag', locked: true },
-  { id: 'lora', title: 'Fine-Tuner', description: 'LoRA Training', icon: <img src="https://api.iconify.design/simple-icons:huggingface.svg?color=white" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 168, y: 192, parent: 'llm' },
-  { id: 'mcp', title: 'Tool Maker', description: 'MCP Development', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" className="w-[28px] h-[28px] object-contain select-none" draggable={false} />, x: 104, y: 192, parent: 'prompt' },
+  {
+    id: 'prompt',
+    title: 'Prompt Architect',
+    description: 'System Prompt Architecture',
+    icon: (
+      <img
+        src='https://api.iconify.design/simple-icons:openai.svg?color=white'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 40,
+    y: 64,
+  },
+  {
+    id: 'llm',
+    title: 'Model Integration',
+    description: 'LLM Orchestration',
+    icon: (
+      <img
+        src='https://api.iconify.design/simple-icons:anthropic.svg?color=white'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 104,
+    y: 64,
+    parent: 'prompt',
+  },
+  {
+    id: 'rag',
+    title: 'Memory Bank',
+    description: 'Retrieval-Augmented Generation',
+    icon: (
+      <img
+        src='https://api.iconify.design/carbon:network-4.svg?color=white'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 168,
+    y: 0,
+    parent: 'llm',
+  },
+  {
+    id: 'agents',
+    title: 'Autonomous Units',
+    description: 'Multi-Agent Systems',
+    icon: (
+      <img
+        src='https://api.iconify.design/simple-icons:langchain.svg?color=white'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 232,
+    y: 0,
+    parent: 'rag',
+    type: 'challenge',
+  },
+  {
+    id: 'lora',
+    title: 'Fine-Tuner',
+    description: 'LoRA Fine-tuning',
+    icon: (
+      <img
+        src='https://api.iconify.design/simple-icons:huggingface.svg?color=white'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 168,
+    y: 128,
+    parent: 'llm',
+  },
+  {
+    id: 'python',
+    title: 'The Serpent',
+    description: 'Python Development',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 40,
+    y: 256,
+  },
+  {
+    id: 'mcp',
+    title: 'Tool Maker',
+    description: 'MCP Server Development',
+    icon: (
+      <img src='https://api.iconify.design/carbon:tools.svg?color=white' className='w-[28px] h-[28px] object-contain select-none' draggable={false} />
+    ),
+    x: 104,
+    y: 192,
+    parent: 'python',
+  },
+  {
+    id: 'pytorch',
+    title: 'Deep Learning',
+    description: 'PyTorch',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 104,
+    y: 320,
+    parent: 'python',
+    locked: true,
+  },
+  {
+    id: 'tensorflow',
+    title: 'Neural Nets',
+    description: 'TensorFlow & Keras',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 168,
+    y: 320,
+    parent: 'pytorch',
+    locked: true,
+  },
+  {
+    id: 'bedrock',
+    title: 'AWS Bedrock',
+    description: 'AWS Foundation Models',
+    icon: <img src='/icons/aws-icon.webp' className='w-[28px] h-[28px] object-contain rounded-[4px] select-none' draggable={false} />,
+    x: 320,
+    y: 0,
+  },
+  {
+    id: 'vertex',
+    title: 'Google Vertex',
+    description: 'Gemini API & Cloud AI',
+    icon: <img src='https://api.iconify.design/logos:google-cloud.svg' className='w-[28px] h-[28px] object-contain select-none' draggable={false} />,
+    x: 320,
+    y: 64,
+  },
+  {
+    id: 'azure',
+    title: 'Azure AI',
+    description: 'Azure AI Services',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg'
+        className='w-[28px] h-[28px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+    x: 320,
+    y: 128,
+    locked: true,
+  },
 ]
 
 const TABS = [
-  { id: 'WEB', title: 'Web', icon: <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" className="w-[24px] h-[24px] object-contain select-none" draggable={false} /> },
-  { id: 'INFRA', title: 'Infrastructure', icon: <img src="/icons/aws-icon.webp" className="w-[24px] h-[24px] object-contain rounded-[4px] select-none" draggable={false} /> },
-  { id: 'AI', title: 'AI  /  ML', icon: <img src="https://api.iconify.design/simple-icons:openai.svg?color=white" className="w-[24px] h-[24px] object-contain select-none" draggable={false} /> },
+  {
+    id: 'WEB',
+    title: 'Web',
+    icon: (
+      <img
+        src='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg'
+        className='w-[24px] h-[24px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+  },
+  {
+    id: 'INFRA',
+    title: 'Infrastructure',
+    icon: <img src='/icons/aws-icon.webp' className='w-[24px] h-[24px] object-contain rounded-[4px] select-none' draggable={false} />,
+  },
+  {
+    id: 'AI',
+    title: 'AI  /  ML',
+    icon: (
+      <img
+        src='https://api.iconify.design/simple-icons:openai.svg?color=white'
+        className='w-[24px] h-[24px] object-contain select-none'
+        draggable={false}
+      />
+    ),
+  },
 ] as const
 
 export default function AdvancementsScreen({ onBack }: { onBack: () => void }) {
@@ -309,7 +701,7 @@ export default function AdvancementsScreen({ onBack }: { onBack: () => void }) {
                     minHeight: '34px',
                   }}
                 >
-                  <div style={{ transform: 'translateY(10px)' }}>{hoveredTooltip.node.title}</div>
+                  <div style={{ transform: 'translateY(5px)' }}>{hoveredTooltip.node.title}</div>
                 </div>
 
                 {/* Description */}

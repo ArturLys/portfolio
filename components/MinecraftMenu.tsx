@@ -6,14 +6,11 @@ import { ScreenState } from '@/app/page'
 const SPLASH_TEXTS = [
   '10,000 lines of TypeScript!',
   'Codes since age 10!',
-  '日本語勉強中！',
   'Also available in Ukrainian!',
   'Full-Stack Engineer!',
-  '3rd in Lviv!',
-  'Cherry blossoms!',
+  'Olympiad 3rd place!',
   'Now with more Next.js!',
   'AI-powered!',
-  'Built different!',
 ]
 
 /** Play the MC click sound. Cached after first load. */
@@ -111,36 +108,19 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
 
       {/* Menu */}
       <div className='flex flex-col items-center justify-center relative'>
-        {/* SVG Title */}
-        <svg viewBox='0 0 600 120' className='w-[500px] max-w-[90vw] h-auto mb-10 select-none overflow-visible'>
-          <defs>
-            <linearGradient id='mc-text' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='0%' stopColor='#ffffff' />
-              <stop offset='100%' stopColor='#aaaaaa' />
-            </linearGradient>
-            <filter id='mc-shadow' x='-10%' y='-10%' width='120%' height='120%'>
-              <feDropShadow dx='4' dy='4' stdDeviation='0' floodColor='#111111' floodOpacity='1' />
-            </filter>
-          </defs>
-          <text
-            x='50%'
-            y='50%'
-            dominantBaseline='middle'
-            textAnchor='middle'
-            className='font-minecraft text-[64px] tracking-[4px]'
-            fill='url(#mc-text)'
-            stroke='#222'
-            strokeWidth='3'
-            strokeLinejoin='miter'
-            filter='url(#mc-shadow)'
-          >
-            ARTUR LYS
-          </text>
-        </svg>
-
-        {/* Splash text */}
-        <div className='animate-splash font-minecraft text-[16px] text-[#ffff00] [text-shadow:2px_2px_0px_#3f3f00] absolute top-[35px] right-[-20px] whitespace-nowrap select-none pointer-events-none z-30'>
-          {splash}
+        {/* Title Area */}
+        <div className='relative flex justify-center mt-[-200px] mb-[100px] w-[500px] max-w-[90vw]'>
+          <img
+            src='/title.png'
+            alt='ARTUR LYS'
+            className='w-full h-auto select-none drop-shadow-[4px_4px_0_rgba(17,17,17,1)]'
+            draggable={false}
+            style={{ imageRendering: 'pixelated' }}
+          />
+          {/* Splash text */}
+          <div className='animate-splash font-minecraft text-[16px] text-[#ffff00] [text-shadow:2px_2px_0px_#3f3f00] absolute bottom-[-10px] right-[-20px] whitespace-nowrap select-none pointer-events-none z-30'>
+            {splash}
+          </div>
         </div>
 
         <div className='flex flex-col items-center gap-[6px] w-[400px] max-w-[80vw]'>
@@ -154,7 +134,7 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
             <McButton onClick={() => onNavigate('ABOUT')} className='flex-1'>
               About&nbsp;&nbsp;Me
             </McButton>
-            <McButton onClick={() => window.open('https://github.com/ArturLys', '_blank')} className='flex-1'>
+            <McButton onClick={() => window.open('https://github.com/ArturLys/portfolio/', '_blank')} className='flex-1'>
               GitHub
             </McButton>
           </div>
