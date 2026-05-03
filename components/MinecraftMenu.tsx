@@ -111,15 +111,43 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
         }}
       />
 
-      {/* Splash text */}
-      <div className='animate-splash font-minecraft text-[12px] text-yellow-400 [text-shadow:1px_1px_0px_#3f3f00] absolute top-[28%] right-[18%] whitespace-nowrap select-none pointer-events-none z-3'>
-        {splash}
-      </div>
-
       {/* Menu */}
-      <div className='flex flex-col items-center justify-center'>
-        <h1 className='font-minecraft text-[36px] text-white [text-shadow:2px_2px_0px_#3f3f3f] tracking-[3px] mb-1 select-none'>ARTUR LYS</h1>
-        <p className='font-minecraft text-[8px] text-[#aaa] [text-shadow:1px_1px_0px_#3f3f3f] mb-10 select-none'>Full-Stack Engineer</p>
+      <div className='flex flex-col items-center justify-center relative'>
+        
+        {/* SVG Title */}
+        <svg 
+          viewBox="0 0 600 120" 
+          className="w-[500px] max-w-[90vw] h-auto mb-10 select-none overflow-visible"
+        >
+          <defs>
+            <linearGradient id="mc-text" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="100%" stopColor="#aaaaaa" />
+            </linearGradient>
+            <filter id="mc-shadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="4" dy="4" stdDeviation="0" floodColor="#111111" floodOpacity="1" />
+            </filter>
+          </defs>
+          <text 
+            x="50%" 
+            y="50%" 
+            dominantBaseline="middle" 
+            textAnchor="middle" 
+            className="font-minecraft text-[64px] tracking-[4px]"
+            fill="url(#mc-text)"
+            stroke="#222"
+            strokeWidth="3"
+            strokeLinejoin="miter"
+            filter="url(#mc-shadow)"
+          >
+            ARTUR LYS
+          </text>
+        </svg>
+
+        {/* Splash text */}
+        <div className='animate-splash font-minecraft text-[16px] text-[#ffff00] [text-shadow:2px_2px_0px_#3f3f00] absolute top-[35px] right-[-20px] whitespace-nowrap select-none pointer-events-none z-30'>
+          {splash}
+        </div>
 
         <div className='flex flex-col items-center gap-[6px] w-[400px] max-w-[80vw]'>
           <McButton onClick={() => onNavigate('PROJECTS')}>Singleplayer</McButton>
@@ -130,7 +158,7 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
 
           <div className='flex gap-[6px] w-full items-center'>
             <McButton onClick={() => onNavigate('ABOUT')} className='flex-1'>
-              About Me
+              About&nbsp;&nbsp;Me
             </McButton>
             <McButton onClick={() => window.open('https://github.com/ArturLys', '_blank')} className='flex-1'>
               GitHub
@@ -140,11 +168,11 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
       </div>
 
       {/* Bottom text */}
-      <div className='fixed bottom-1 left-2 font-minecraft text-[8px] text-[#aaa] [text-shadow:1px_1px_0px_#000] z-2 select-none'>
-        Artur Lys Portfolio
+      <div className='fixed bottom-0 left-1 font-minecraft text-[10px] text-[#aaa] [text-shadow:1px_1px_0px_#000] z-20 select-none whitespace-pre'>
+        Artur  Lys  Portfolio
       </div>
-      <div className='fixed bottom-1 right-2 font-minecraft text-[8px] text-[#aaa] [text-shadow:1px_1px_0px_#000] z-2 select-none'>
-        Next.js 16 / Three.js
+      <div className='fixed bottom-0 right-1 font-minecraft text-[10px] text-[#aaa] [text-shadow:1px_1px_0px_#000] z-20 select-none whitespace-pre'>
+        Next.js  16  /  Three.js
       </div>
     </div>
   )

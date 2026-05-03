@@ -90,7 +90,7 @@ export default function AchievementsScreen({ onBack }: { onBack: () => void }) {
             >
               {tab === "WEB" && "Web"}
               {tab === "INFRA" && "Infrastructure"}
-              {tab === "AI" && "AI / ML"}
+              {tab === "AI" && "AI  /  ML"}
             </button>
           ))}
         </div>

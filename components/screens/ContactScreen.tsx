@@ -96,10 +96,10 @@ export default function ContactScreen({ onBack }: { onBack: () => void }) {
   return (
     <div className='absolute inset-0 z-20 flex flex-col items-center pt-4 bg-black/70'>
       <h2
-        className='font-minecraft text-[16px] text-white mb-2 select-none'
+        className='font-minecraft text-[16px] text-white mb-2 select-none whitespace-pre'
         style={{ textShadow: '2px 2px 0px #3f3f3f', WebkitFontSmoothing: 'none' }}
       >
-        Play Multiplayer
+        Play&nbsp;&nbsp;Multiplayer
       </h2>
 
       {/* Server List Container */}
@@ -158,7 +158,7 @@ export default function ContactScreen({ onBack }: { onBack: () => void }) {
             {/* Scanning text */}
             <div className='mt-6 text-center'>
               <span
-                className='font-minecraft text-[14px] text-white select-none block'
+                className='font-minecraft text-[14px] text-white select-none block whitespace-pre'
                 style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.1)', WebkitFontSmoothing: 'none', wordSpacing: '2px' }}
               >
                 Scanning for games on your local network
@@ -179,17 +179,17 @@ export default function ContactScreen({ onBack }: { onBack: () => void }) {
       </div>
 
       {/* Bottom Controls */}
-      <div className='pt-4 pb-12 w-[700px] max-w-[95vw] flex flex-col gap-[5px] relative z-20'>
+      <div className='pt-4 pb-6 w-[700px] max-w-[95vw] flex flex-col gap-[5px] relative z-20'>
         {/* Row 1: Join Server, Direct Connection, Add Server */}
         <div className='flex gap-[5px] w-full'>
           <McButton className='flex-1 w-auto h-[40px]' disabled={!selected} onClick={handleJoin}>
-            Join Server
+            Join&nbsp;&nbsp;Server
           </McButton>
           <McButton className='flex-1 w-auto h-[40px]' disabled>
-            Direct Connection
+            Direct&nbsp;&nbsp;Connection
           </McButton>
           <McButton className='flex-1 w-auto h-[40px]' disabled>
-            Add Server
+            Add&nbsp;&nbsp;Server
           </McButton>
         </div>
 
