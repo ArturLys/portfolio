@@ -30,8 +30,7 @@ const PROJECTS: Project[] = [
   {
     id: 'ai-image-search',
     name: 'AI Image Search',
-    description:
-      'Semantic vector-based image retrieval using Gemini. Allows for natural language searching through large image datasets.',
+    description: 'Semantic vector-based image retrieval using Gemini. Allows for natural language searching through large image datasets.',
     shortDescription: 'Semantic image retrieval',
     version: 'Gemini / Next.js',
     updatedAt: 'April 28, 2026',
@@ -57,7 +56,7 @@ const PROJECTS: Project[] = [
     shortDescription: 'Real-time multiplayer game',
     version: 'React / Express / Socket.io',
     updatedAt: 'March 15, 2026',
-    url: 'https://tictactoe.vercel.app',
+    url: 'https://react-speed-run.vercel.app/tic-tac-toe',
     repoUrl: 'https://github.com/ArturLys/tictactoe',
     images: ['/screenshots/ttt_1.png'],
   },
@@ -108,7 +107,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
           <div className='w-full bg-black/40 p-4 min-h-[100px] pt-[17px]'>
             <p className='font-minecraft text-[14px] text-[#e0e0e0] leading-relaxed pt-[7px]'>{showDetail.description}</p>
             <p className='font-minecraft text-[12px] text-[#808080] mt-4 pt-[7px]'>Stack: {showDetail.version}</p>
-            
+
             {/* Screenshots inside the same box */}
             <div className='flex gap-2 w-full overflow-x-auto py-2 mt-4'>
               {showDetail.images?.map((img, i) => (
