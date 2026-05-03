@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { ScreenState } from '@/app/page'
+import { useRouter } from 'next/navigation'
 
 const SPLASH_TEXTS = [
   '10,000 lines of TypeScript!',
@@ -88,7 +88,8 @@ export function McButton({
   )
 }
 
-export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenState) => void }) {
+export default function MinecraftMenu() {
+  const router = useRouter()
   const [splash, setSplash] = useState('')
 
   useEffect(() => {
@@ -124,14 +125,14 @@ export default function MinecraftMenu({ onNavigate }: { onNavigate: (s: ScreenSt
         </div>
 
         <div className='flex flex-col items-center gap-[6px] w-[400px] max-w-[80vw]'>
-          <McButton onClick={() => onNavigate('PROJECTS')}>Singleplayer</McButton>
-          <McButton onClick={() => onNavigate('CONTACT')}>Multiplayer</McButton>
-          <McButton onClick={() => onNavigate('ACHIEVEMENTS')}>Advancements</McButton>
+          <McButton onClick={() => router.push('/projects')}>Singleplayer</McButton>
+          <McButton onClick={() => router.push('/contact')}>Multiplayer</McButton>
+          <McButton onClick={() => router.push('/achievements')}>Advancements</McButton>
 
           <div className='h-[12px]' />
 
           <div className='flex gap-[6px] w-full items-center'>
-            <McButton onClick={() => onNavigate('ABOUT')} className='flex-1'>
+            <McButton onClick={() => router.push('/about')} className='flex-1'>
               About&nbsp;&nbsp;Me
             </McButton>
             <McButton onClick={() => window.open('https://github.com/ArturLys/portfolio/', '_blank')} className='flex-1'>

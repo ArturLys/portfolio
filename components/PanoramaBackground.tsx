@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export default function PanoramaBackground() {
+export default function PanoramaBackground({ onLoad }: { onLoad?: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -34,8 +34,16 @@ export default function PanoramaBackground() {
       "/panorama/panorama_2.png", // back (-z) — north
     ];
 
+    let loadedCount = 0;
     const materials = faceFiles.map((file) => {
-      const tex = loader.load(file);
+      const tex = loader.load(file, () => {
+        loadedCount++;
+        if (loadedCount === 6) {
+          document.fonts.ready.then(() => {
+            onLoad?.();
+          });
+        }
+      });
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.minFilter = THREE.LinearFilter;
       tex.magFilter = THREE.LinearFilter;
