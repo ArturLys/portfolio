@@ -3,15 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
-const SPLASH_TEXTS = [
-  '10,000 lines of TypeScript!',
-  'Codes since age 10!',
-  'Also available in Ukrainian!',
-  'Full-Stack Engineer!',
-  'Olympiad 3rd place!',
-  'Now with more Next.js!',
-  'AI-powered!',
-]
+const SPLASH_TEXTS = ['Full-Stack Engineer!']
 
 /** Play the MC click sound. Cached after first load. */
 let clickAudio: HTMLAudioElement | null = null
