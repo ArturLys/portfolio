@@ -153,7 +153,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
 
       {/* Bottom Controls - Exact Minecraft Layout with Center Gap */}
       <div className='pt-4 pb-6 w-[700px] max-w-[95vw] flex flex-col gap-[4px] relative z-20'>
-        <div className='flex gap-4 w-full'>
+        <div className='flex gap-3 w-full'>
           <div className='flex flex-1'>
             <McButton className='w-full h-[40px]' disabled={!selected} onClick={handlePlay}>
               Play&nbsp;&nbsp;Selected&nbsp;&nbsp;World
@@ -168,7 +168,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
             </McButton>
           </div>
         </div>
-        <div className='flex gap-4 w-full'>
+        <div className='flex gap-3 w-full'>
           <div className='flex gap-[4px] flex-1'>
             <McButton className='flex-1 w-auto h-[40px]' disabled>
               Edit
