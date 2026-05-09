@@ -17,15 +17,15 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
-    id: 'chistolis',
-    name: 'Chystolys Skateshop',
+    id: 'chystolys',
+    name: 'Chystolys',
     description: 'Production E-commerce for my dad with private code. Features AI-powered product generation and a custom admin dashboard.',
     shortDescription: 'E-commerce for dad',
     version: 'Next.js 15.1 / Prisma',
     updatedAt: 'May 1, 2026',
     url: 'https://chystolys.vercel.app',
     repoUrl: 'https://github.com/ArturLys/chystolys',
-    images: ['/screenshots/chistolis_1.png'],
+    images: ['/screenshots/chystolys_1.png'],
   },
   {
     id: 'ai-image-search',
@@ -57,7 +57,7 @@ const PROJECTS: Project[] = [
     version: 'React / Express / Socket.io',
     updatedAt: 'March 15, 2026',
     url: 'https://react-speed-run.vercel.app/tic-tac-toe',
-    repoUrl: 'https://github.com/ArturLys/tictactoe',
+    repoUrl: 'https://github.com/ArturLys/react-speedrun',
     images: ['/screenshots/ttt_1.png'],
   },
 ]
