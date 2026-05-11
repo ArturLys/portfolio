@@ -2,12 +2,16 @@
 
 import { useEffect, useState, lazy, Suspense } from "react";
 import { useRouter } from "next/navigation";
+import { usePreloadAssets } from "./usePreloadAssets";
 
 const PanoramaBackground = lazy(() => import("./PanoramaBackground"));
 
 export default function AppWrapper({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // Start preloading project icons/screenshots after panorama loads
+  usePreloadAssets(isLoaded);
 
   useEffect(() => {
     // Listen for Esc key globally
