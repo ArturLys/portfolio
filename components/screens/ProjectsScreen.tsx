@@ -215,16 +215,12 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
                         ${selected === p.id ? 'bg-black/60 border-white/80' : 'border-transparent hover:bg-black/30'}
                       `}
                     >
-                      <div className="w-[64px] h-[64px] flex-shrink-0 bg-[#333] border-[1px] border-[#555] relative overflow-hidden">
-                        <Image
-                          src={p.icon}
-                          alt={p.name}
-                          fill
-                          sizes="64px"
-                          className="object-cover"
-                          style={{ imageRendering: 'pixelated' }}
-                        />
-                      </div>
+                      <img
+                        src={p.icon}
+                        alt={p.name}
+                        className="w-[64px] h-[64px] flex-shrink-0 bg-[#333] border-[1px] border-[#555] object-cover"
+                        style={{ imageRendering: 'pixelated' }}
+                      />
                       <div className="flex flex-col justify-center min-w-0 leading-tight">
                         <span
                           className="font-minecraft text-[14px] text-white whitespace-nowrap mb-1"

@@ -3,12 +3,11 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * All assets to preload in the background after the panorama loads.
- * Icons first (small, needed for world list), then screenshots,
- * then other assets used across screens.
+ * All assets to prefetch in the background after the panorama loads.
+ * Icons first (small), then screenshots (large).
  */
-const PRELOAD_ASSETS = [
-  // Project icons — small, load first so the world list is instant
+const PREFETCH_ASSETS = [
+  // Project icons
   '/worlds/chystolys-icon.png',
   '/worlds/image-search-icon.webp',
   '/worlds/forum-icon.png',
@@ -33,42 +32,31 @@ const PRELOAD_ASSETS = [
   '/icons/aws-icon.webp',
 ]
 
-function preloadImage(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => resolve()
-    img.onerror = () => reject()
-    img.src = src
-  })
-}
+/**
+ * Injects <link rel="prefetch"> tags into the document head.
+ * The browser will download these at low priority in the background
+ * without blocking anything. Works reliably on all browsers and Vercel.
+ */
+function injectPrefetchLinks(assets: string[]): HTMLLinkElement[] {
+  const links: HTMLLinkElement[] = []
 
-async function preloadSequentially(
-  assets: string[],
-  signal: AbortSignal
-): Promise<void> {
   for (const src of assets) {
-    if (signal.aborted) return
+    // Skip if already prefetched
+    if (document.querySelector(`link[rel="prefetch"][href="${src}"]`)) continue
 
-    await new Promise<void>((resolve) => {
-      if (typeof requestIdleCallback !== 'undefined') {
-        requestIdleCallback(() => resolve(), { timeout: 2000 })
-      } else {
-        setTimeout(resolve, 0)
-      }
-    })
-
-    if (signal.aborted) return
-
-    try {
-      await preloadImage(src)
-    } catch {
-      // Silently skip — will load on demand
-    }
+    const link = document.createElement('link')
+    link.rel = 'prefetch'
+    link.as = 'image'
+    link.href = src
+    document.head.appendChild(link)
+    links.push(link)
   }
+
+  return links
 }
 
 /**
- * Begins background preloading of all project assets
+ * Hook that injects prefetch hints for all project assets
  * once the panorama has finished loading.
  */
 export function usePreloadAssets(isReady: boolean): void {
@@ -78,15 +66,18 @@ export function usePreloadAssets(isReady: boolean): void {
     if (!isReady || hasStarted.current) return
     hasStarted.current = true
 
-    const controller = new AbortController()
-
+    // Small delay so the loading screen fade-out settles first
     const timer = setTimeout(() => {
-      preloadSequentially(PRELOAD_ASSETS, controller.signal)
-    }, 500)
+      const links = injectPrefetchLinks(PREFETCH_ASSETS)
+
+      // Cleanup on unmount (shouldn't happen, but good practice)
+      return () => {
+        links.forEach((link) => link.remove())
+      }
+    }, 300)
 
     return () => {
       clearTimeout(timer)
-      controller.abort()
     }
   }, [isReady])
 }
