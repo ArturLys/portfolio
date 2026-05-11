@@ -44,7 +44,7 @@ export default function AboutScreen({ onBack }: { onBack: () => void }) {
           className="w-[160px] h-[160px] object-cover border-[4px] border-solid border-t-[#fff] border-l-[#fff] border-r-[#555] border-b-[#555] bg-[#8b8b8b] select-none shadow-[4px_4px_0px_rgba(0,0,0,0.5)] hover-vibrate"
           draggable={false}
         />
-        <p className="font-minecraft text-[16px] text-[#e0e0e0] leading-[28px] [text-shadow:2px_2px_0px_#222] max-w-[480px] whitespace-pre-wrap">
+        <p className="font-minecraft text-[16px] text-[#e0e0e0] leading-[28px] [text-shadow:2px_2px_0px_#222] max-w-[450px] whitespace-pre-wrap">
           {
             "Hi,  I'm  Artur  -  based  in  Lviv,  Ukraine.  Been  coding  since  5th  grade.  CS  student  at  LNU.  I  build  web  apps  and  AI tools"
           }
