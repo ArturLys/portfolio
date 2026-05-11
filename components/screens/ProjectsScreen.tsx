@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { McButton } from '../MinecraftMenu'
 
@@ -132,11 +133,13 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
                     className="w-full bg-[#333] border-[2px] border-[#555] relative overflow-hidden cursor-zoom-in group hover:border-white transition-colors"
                     onClick={() => setZoomedImage(img)}
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`Screenshot ${i + 1}`}
+                      width={1200}
+                      height={675}
                       className="w-full h-auto block transition-transform duration-300 group-hover:scale-[1.02]"
-                      style={{ imageRendering: 'pixelated' }}
+                      quality={90}
                     />
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="font-minecraft text-[12px] text-white [text-shadow:1px_1px_0px_#000]">
@@ -212,14 +215,16 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
                         ${selected === p.id ? 'bg-black/60 border-white/80' : 'border-transparent hover:bg-black/30'}
                       `}
                     >
-                      <div
-                        className="w-[64px] h-[64px] flex-shrink-0 bg-[#333] border-[1px] border-[#555]"
-                        style={{
-                          backgroundImage: `url('${p.icon}')`,
-                          backgroundSize: 'cover',
-                          imageRendering: 'pixelated',
-                        }}
-                      />
+                      <div className="w-[64px] h-[64px] flex-shrink-0 bg-[#333] border-[1px] border-[#555] relative overflow-hidden">
+                        <Image
+                          src={p.icon}
+                          alt={p.name}
+                          fill
+                          sizes="64px"
+                          className="object-cover"
+                          style={{ imageRendering: 'pixelated' }}
+                        />
+                      </div>
                       <div className="flex flex-col justify-center min-w-0 leading-tight">
                         <span
                           className="font-minecraft text-[14px] text-white whitespace-nowrap mb-1"
@@ -306,7 +311,6 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
                 src={zoomedImage}
                 alt="Zoomed screenshot"
                 className="max-w-full max-h-full object-contain shadow-2xl"
-                style={{ imageRendering: 'pixelated' }}
               />
             </motion.div>
           </motion.div>

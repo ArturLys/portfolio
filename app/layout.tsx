@@ -16,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <head>
+        <link rel="preload" href="/fonts/Minecraftia-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/textures/ui/button.png" as="image" />
         <link rel="preload" href="/textures/ui/button_highlighted.png" as="image" />
         <link rel="preload" href="/textures/ui/button_disabled.png" as="image" />
