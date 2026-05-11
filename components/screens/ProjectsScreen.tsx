@@ -75,6 +75,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
   const [selected, setSelected] = useState<string | null>(null)
   const [search, setSearch] = useState('')
   const [showDetail, setShowDetail] = useState<Project | null>(null)
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null)
 
   const filteredProjects = PROJECTS.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
 
@@ -108,7 +109,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
           Description
         </h2>
 
-        <div className="flex flex-col items-center w-[400px] max-w-[95vw] gap-4">
+        <div className="flex flex-col items-center w-[600px] max-w-[95vw] gap-4">
           <div className="w-full">
             <p className="font-minecraft text-[14px] text-[#aaa] mb-1">Project Name</p>
             <div className="w-full h-[40px] bg-black border-[2px] border-[#555] flex items-center px-3 pt-[7px]">
@@ -123,18 +124,22 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
             <p className="font-minecraft text-[12px] text-[#808080] mt-4 pt-[7px]">Stack: {showDetail.version}</p>
 
             {/* Screenshots inside the same box */}
-            <div className="flex gap-2 w-full overflow-x-auto py-2 mt-4 scrollbar-mc">
+            <div className="flex gap-4 w-full overflow-x-auto py-2 mt-4 scrollbar-mc">
               {showDetail.images?.map((img, i) => (
                 <div
                   key={i}
-                  className="w-[120px] h-[80px] bg-[#333] border-[2px] border-[#555] flex-shrink-0 relative overflow-hidden"
+                  className="w-[280px] h-[160px] bg-[#333] border-[2px] border-[#555] flex-shrink-0 relative overflow-hidden cursor-zoom-in group hover:border-white transition-colors"
+                  onClick={() => setZoomedImage(img)}
                 >
                   <img
                     src={img}
                     alt={`Screenshot ${i + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     style={{ imageRendering: 'pixelated' }}
                   />
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="font-minecraft text-[12px] text-white [text-shadow:1px_1px_0px_#000]">Click to Zoom</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -272,6 +277,27 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
           </div>
         </div>
       </div>
+      {/* Zoomed Image Overlay */}
+      {zoomedImage && (
+        <div
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/90 p-4 md:p-12 animate-in fade-in duration-200"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div className="relative max-w-5xl w-full h-full flex flex-col items-center justify-center gap-6">
+            <div className="relative w-full h-full border-[4px] border-white bg-black/40 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+              <img
+                src={zoomedImage}
+                alt="Zoomed screenshot"
+                className="w-full h-full object-contain"
+                style={{ imageRendering: 'pixelated' }}
+              />
+            </div>
+            <McButton className="w-[200px] h-[40px]" onClick={() => setZoomedImage(null)}>
+              Done
+            </McButton>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
