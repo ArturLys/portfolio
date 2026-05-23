@@ -221,6 +221,12 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
                           {p.name}
                         </span>
                         <span
+                          className='font-minecraft text-[14px] text-[#808080] whitespace-nowrap'
+                          style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.1)', WebkitFontSmoothing: 'none' }}
+                        >
+                          {p.shortDescription}
+                        </span>
+                        <span
                           className='font-minecraft text-[16px] text-[#808080] whitespace-nowrap'
                           style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.1)', WebkitFontSmoothing: 'none' }}
                         >
