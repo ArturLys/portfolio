@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { McButton } from '../MinecraftMenu'
+import { ComingSoonScreen } from './ComingSoonScreen'
 
 interface Project {
   id: string
@@ -81,13 +82,18 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
   const [search, setSearch] = useState('')
   const [showDetail, setShowDetail] = useState<Project | null>(null)
   const [zoomedImage, setZoomedImage] = useState<string | null>(null)
+  const [showComingSoon, setShowComingSoon] = useState(false)
 
   const filteredProjects = PROJECTS.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
 
   const handlePlay = () => {
     const project = PROJECTS.find((p) => p.id === selected)
-    if (project && project.url !== '#') {
-      window.open(project.url, '_blank')
+    if (project) {
+      if (project.url === 'Coming soon') {
+        setShowComingSoon(true)
+      } else if (project.url !== '#') {
+        window.open(project.url, '_blank')
+      }
     }
   }
 
@@ -100,6 +106,10 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
 
   const handleDoubleClick = (project: Project) => {
     setShowDetail(project)
+  }
+
+  if (showComingSoon) {
+    return <ComingSoonScreen onBack={() => setShowComingSoon(false)} />
   }
 
   return (
@@ -148,7 +158,17 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
             </div>
 
             <div className='flex flex-col gap-[6px] w-full mt-4'>
-              <McButton className='w-full h-[40px]' disabled={showDetail.url === '#'} onClick={() => window.open(showDetail.url, '_blank')}>
+              <McButton
+                className='w-full h-[40px]'
+                disabled={showDetail.url === '#' || showDetail.url === 'Coming soon'}
+                onClick={() => {
+                  if (showDetail.url === 'Coming soon') {
+                    setShowComingSoon(true)
+                  } else {
+                    window.open(showDetail.url, '_blank')
+                  }
+                }}
+              >
                 Play&nbsp;&nbsp;World
               </McButton>
               <McButton className='w-full h-[40px]' onClick={() => window.open(showDetail.repoUrl, '_blank')}>
