@@ -45,9 +45,10 @@ const PROJECTS: Project[] = [
   {
     id: 'ai-image-search',
     name: 'AI Image Search',
-    description: 'Semantic vector-based image retrieval using Gemini. Allows for natural language searching through large image datasets.',
+    description:
+      'Semantic vector-based image retrieval using Gemini. Allows for natural language searching through large image datasets. Build without AI to practice my raw development skills',
     shortDescription: 'Semantic image retrieval',
-    version: 'Gemini / Next.js',
+    version: 'Gemini / Next.js / ',
     url: 'https://ai-image-search-xi.vercel.app',
     repoUrl: 'https://github.com/ArturLys/ai-image-search',
     icon: '/worlds/image-search-icon.webp',
@@ -56,8 +57,8 @@ const PROJECTS: Project[] = [
   {
     id: 'forum',
     name: "The Friends' Forum",
-    description: 'My ugly first forum project. A raw dive into community platforms and full-stack basics. Humble beginnings.',
-    shortDescription: 'My ugly first forum',
+    description: 'My first forum project. A raw dive into community platforms and full-stack basics. Humble beginnings.',
+    shortDescription: 'My first forum build without using ai for my friends',
     version: 'Prisma / Clerk / Next.js',
     url: 'https://gooning.fun',
     repoUrl: 'https://github.com/ArturLys/forum',
