@@ -58,7 +58,7 @@ const PROJECTS: Project[] = [
     id: 'forum',
     name: "The Friends' Forum",
     description: 'My first forum project. A raw dive into community platforms and full-stack basics. Humble beginnings.',
-    shortDescription: 'My first forum build without using ai for my friends',
+    shortDescription: 'My first forum build for friends',
     version: 'Prisma / Clerk / Next.js',
     url: 'https://gooning.fun',
     repoUrl: 'https://github.com/ArturLys/forum',
