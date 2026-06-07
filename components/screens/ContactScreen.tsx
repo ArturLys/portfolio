@@ -204,7 +204,7 @@ export default function ContactScreen({ onBack }: { onBack: () => void }) {
           <McButton className='flex-1 w-auto h-[40px]' disabled>
             Refresh
           </McButton>
-          <McButton className='flex-1 w-auto h-[40px]' onClick={onBack}>
+          <McButton className='flex-1 w-auto h-[40px]' href='/'>
             Back
           </McButton>
         </div>

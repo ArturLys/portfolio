@@ -291,7 +291,7 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
                 <McButton className='flex-1 w-auto h-[40px]' disabled>
                   Re-Create
                 </McButton>
-                <McButton className='flex-1 w-auto h-[40px]' onClick={onBack}>
+                <McButton className='flex-1 w-auto h-[40px]' href='/'>
                   Back
                 </McButton>
               </div>

@@ -751,7 +751,7 @@ export default function AdvancementsScreen({ onBack }: { onBack: () => void }) {
 
       {/* Bottom Button */}
       <div className='mt-8 w-[400px]'>
-        <McButton onClick={onBack}>Done</McButton>
+        <McButton href='/'>Done</McButton>
       </div>
     </div>
   )

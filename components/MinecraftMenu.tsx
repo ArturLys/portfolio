@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const SPLASH_TEXTS = ['Full-Stack Engineer!']
 
@@ -22,43 +23,49 @@ export function McButton({
   onClick,
   disabled,
   className = '',
+  href,
+  target,
 }: {
   children: React.ReactNode
   onClick?: () => void
   disabled?: boolean
   className?: string
+  href?: string
+  target?: string
 }) {
-  const handleClick = useCallback(() => {
-    if (disabled) return
+  const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    if (disabled) {
+      e.preventDefault()
+      return
+    }
     playClick()
     onClick?.()
   }, [disabled, onClick])
 
-  return (
-    <button
-      onClick={handleClick}
-      disabled={disabled}
-      className={`
-        font-minecraft text-[14px] leading-[40px]
-        w-full h-[40px] select-none text-center
-        transition-none relative
-        ${
-          disabled
-            ? 'cursor-not-allowed text-[#707070] [text-shadow:1.7px_1.7px_0px_#3a3a3a] pointer-events-none'
-            : 'group text-[#e0e0e0] [text-shadow:1.7px_1.7px_0px_#333333]'
-        }
-        ${className}
-      `}
-      style={{
-        borderStyle: 'solid',
-        borderWidth: '4px',
-        borderImageSource: disabled ? "url('/textures/ui/button_disabled.png')" : "url('/textures/ui/button.png')",
-        borderImageSlice: '2 2 2 2 fill',
-        borderImageRepeat: 'stretch',
-        imageRendering: 'pixelated',
-        WebkitFontSmoothing: 'none',
-      }}
-    >
+  const buttonClasses = `
+    font-minecraft text-[14px] leading-[40px]
+    w-full h-[40px] select-none text-center
+    transition-none relative block
+    ${
+      disabled
+        ? 'cursor-not-allowed text-[#707070] [text-shadow:1.7px_1.7px_0px_#3a3a3a] pointer-events-none'
+        : 'group text-[#e0e0e0] [text-shadow:1.7px_1.7px_0px_#333333]'
+    }
+    ${className}
+  `
+
+  const buttonStyles: React.CSSProperties = {
+    borderStyle: 'solid',
+    borderWidth: '4px',
+    borderImageSource: disabled ? "url('/textures/ui/button_disabled.png')" : "url('/textures/ui/button.png')",
+    borderImageSlice: '2 2 2 2 fill',
+    borderImageRepeat: 'stretch',
+    imageRendering: 'pixelated',
+    WebkitFontSmoothing: 'none',
+  }
+
+  const content = (
+    <>
       {/* Dark blue tint overlay for disabled buttons */}
       {disabled && <div className='absolute inset-[-4px] pointer-events-none bg-[#0a1a2a]/40 mix-blend-multiply' />}
 
@@ -76,6 +83,31 @@ export function McButton({
       />
 
       <span className='relative z-10 block w-full h-full'>{children}</span>
+    </>
+  )
+
+  if (href && !disabled) {
+    return (
+      <Link
+        href={href}
+        onClick={handleClick}
+        target={target}
+        className={buttonClasses}
+        style={buttonStyles}
+      >
+        {content}
+      </Link>
+    )
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={disabled}
+      className={buttonClasses}
+      style={buttonStyles}
+    >
+      {content}
     </button>
   )
 }
@@ -122,27 +154,27 @@ export default function MinecraftMenu() {
         </div>
 
         <div className='flex flex-col items-center gap-[6px] w-[400px] max-w-[80vw]'>
-          <McButton onClick={() => router.push('/projects')}>
+          <McButton href='/projects'>
             Singleplayer
             <span className='absolute bottom-[2px] right-[6px] text-[10px] text-[#ddd] leading-none [text-shadow:1px_1px_0px_#222] font-sans opacity-50'>
               (projects)
             </span>
           </McButton>
-          <McButton onClick={() => router.push('/contact')}>
+          <McButton href='/contact'>
             Multiplayer
             <span className='absolute bottom-[2px] right-[6px] text-[10px] text-[#ddd] leading-none [text-shadow:1px_1px_0px_#222] font-sans opacity-50'>
               (contacts)
             </span>
           </McButton>
-          <McButton onClick={() => router.push('/achievements')}>Advancements</McButton>
+          <McButton href='/achievements'>Advancements</McButton>
 
           <div className='h-[12px]' />
 
           <div className='flex gap-[6px] w-full items-center'>
-            <McButton onClick={() => router.push('/about')} className='flex-1'>
+            <McButton href='/about' className='flex-1'>
               About&nbsp;&nbsp;Me
             </McButton>
-            <McButton onClick={() => window.open('https://github.com/ArturLys/portfolio/', '_blank')} className='flex-1'>
+            <McButton href='https://github.com/ArturLys/portfolio/' target='_blank' className='flex-1'>
               GitHub
             </McButton>
           </div>

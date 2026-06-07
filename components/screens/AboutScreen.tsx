@@ -53,7 +53,7 @@ export default function AboutScreen({ onBack }: { onBack: () => void }) {
 
       {/* Done Button */}
       <div className="mt-12 w-[300px]">
-        <McButton onClick={onBack}>Done</McButton>
+        <McButton href="/">Done</McButton>
       </div>
     </div>
   )
