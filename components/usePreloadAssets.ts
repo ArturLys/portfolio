@@ -7,41 +7,65 @@ import { useEffect, useRef } from 'react'
  * Icons first (small), then screenshots (large).
  */
 const PREFETCH_ASSETS = [
+  // UI textures
+  '/textures/ui/button.png',
+  '/textures/ui/button_highlighted.png',
+  '/textures/ui/button_disabled.png',
+  '/textures/ui/dirt.png',
+  '/textures/ui/stone.png',
+  '/textures/ui/advancement.png',
+  '/textures/ui/advancement_completed.png',
+  '/textures/ui/challenge.webp',
+  '/textures/ui/challenge_completed.webp',
+
   // Project icons
   '/worlds/chystolys-icon.png',
   '/worlds/image-search-icon.webp',
   '/worlds/forum-icon.png',
   '/worlds/tic-tac-toe-icon.png',
+  '/worlds/ai-rpg-icon.png',
 
-  // Project screenshots
+  // Project screenshots & example images
   '/worlds/chystolys-home.png',
   '/worlds/chystolys-dashboard.png',
   '/worlds/image-search-main.png',
   '/worlds/forum-main.png',
   '/worlds/tic-tac-toe-main.png',
+  '/worlds/ai-rpg-main.png',
+  '/worlds/ai-rpg-character-example.png',
 
   // About page photo
   '/photo.png',
 
-  // UI textures used as CSS backgroundImage
-  '/textures/ui/dirt.png',
-  '/textures/ui/stone.png',
-
   // Local icons used in achievements
   '/icons/prisma.svg',
   '/icons/aws-icon.webp',
+  '/icons/openai.svg',
+  '/icons/anthropic.svg',
+  '/icons/langchain.svg',
+  '/icons/huggingface.svg',
+  '/icons/chroma.svg',
+  '/icons/chromadb.svg',
+  '/icons/pinecone.svg',
+
+  // Audio assets
+  '/sounds/click.ogg',
 ]
 
 /**
- * Prefetches all assets in the background using JavaScript's Image constructor.
- * This guarantees the browser caches the full file data and avoids Vercel's
- * empty-body prefetch behavior.
+ * Prefetches all assets in the background using JavaScript constructors.
+ * Handles images, SVGs, and audio files appropriately to guarantee browser caching.
  */
 function preloadAllAssets(assets: string[]): void {
   if (typeof window === 'undefined') return
   for (const src of assets) {
-    const img = new window.Image()
-    img.src = src
+    if (src.endsWith('.ogg') || src.endsWith('.mp3') || src.endsWith('.wav')) {
+      const audio = new window.Audio()
+      audio.src = src
+    } else {
+      const img = new window.Image()
+      img.src = src
+    }
   }
 }
 
