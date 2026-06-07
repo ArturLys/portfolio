@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { McButton } from '../MinecraftMenu'
 
 export default function AboutScreen({ onBack }: { onBack: () => void }) {
@@ -35,12 +34,9 @@ export default function AboutScreen({ onBack }: { onBack: () => void }) {
 
       {/* Content Box */}
       <div className="w-[600px] max-w-[90vw] flex flex-col items-center gap-8 text-center mt-4">
-        <Image
+        <img
           src="/photo.png"
           alt="Artur"
-          width={160}
-          height={160}
-          quality={85}
           className="w-[160px] h-[160px] object-cover border-[4px] border-solid border-t-[#fff] border-l-[#fff] border-r-[#555] border-b-[#555] bg-[#8b8b8b] select-none shadow-[4px_4px_0px_rgba(0,0,0,0.5)] hover-vibrate"
           draggable={false}
         />

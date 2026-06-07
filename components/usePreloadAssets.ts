@@ -19,7 +19,6 @@ export const ASSETS_BY_ROUTE: Record<string, string[]> = {
   '/achievements': [
     '/icons/prisma.svg',
     '/icons/aws-icon.webp',
-    
     '/textures/ui/stone.png',
     '/textures/ui/dirt.png',
   ],
@@ -30,23 +29,26 @@ export const ASSETS_BY_ROUTE: Record<string, string[]> = {
   '/contact': [],
 }
 
+// Keep track of already prefetched assets to avoid redundant loads
+const prefetchedAssets = new Set<string>()
+
 /**
- * Injects <link rel="prefetch"> tags into the document head.
- * The browser will download these at low priority in the background.
+ * Prefetches the assets for a given route using a JavaScript Image object.
+ * This works across all browsers (including Safari) and guarantees the assets
+ * are cached by the browser prior to page entry.
  */
 export function prefetchAssetsForRoute(route: string): void {
   const assets = ASSETS_BY_ROUTE[route]
   if (!assets) return
 
   for (const src of assets) {
-    // Skip if already prefetched
-    if (document.querySelector(`link[rel="prefetch"][href="${src}"]`)) continue
+    if (prefetchedAssets.has(src)) continue
+    prefetchedAssets.add(src)
 
-    const link = document.createElement('link')
-    link.rel = 'prefetch'
-    link.as = 'image'
-    link.href = src
-    document.head.appendChild(link)
+    if (typeof window !== 'undefined') {
+      const img = new window.Image()
+      img.src = src
+    }
   }
 }
 

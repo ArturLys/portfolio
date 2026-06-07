@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { McButton } from '../MinecraftMenu'
 import { ComingSoonScreen } from './ComingSoonScreen'
@@ -142,13 +141,11 @@ export default function ProjectsScreen({ onBack }: { onBack: () => void }) {
                     className='w-full bg-[#333] border-[2px] border-[#555] relative overflow-hidden cursor-zoom-in group hover:border-white transition-colors'
                     onClick={() => setZoomedImage(img)}
                   >
-                    <Image
+                    <img
                       src={img}
                       alt={`Screenshot ${i + 1}`}
-                      width={1200}
-                      height={675}
                       className='w-full h-auto block transition-transform duration-300 group-hover:scale-[1.02]'
-                      quality={90}
+                      draggable={false}
                     />
                     <div className='absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center'>
                       <span className='font-minecraft text-[12px] text-white [text-shadow:1px_1px_0px_#000]'>Click to Zoom</span>
