@@ -124,11 +124,17 @@ export function McButton({
 }
 
 export default function MinecraftMenu() {
+  const router = useRouter()
   const [splash, setSplash] = useState('')
 
   useEffect(() => {
     setSplash(SPLASH_TEXTS[Math.floor(Math.random() * SPLASH_TEXTS.length)])
-  }, [])
+
+    router.prefetch('/projects')
+    router.prefetch('/contact')
+    router.prefetch('/achievements')
+    router.prefetch('/about')
+  }, [router])
 
   return (
     <div className='absolute inset-0 z-10 flex flex-col items-center justify-center'>
