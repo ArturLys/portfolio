@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { prefetchAssetsForRoute } from './usePreloadAssets'
 
 const SPLASH_TEXTS = ['Full-Stack Engineer!']
 
@@ -33,6 +34,8 @@ export function McButton({
   href?: string
   target?: string
 }) {
+  const router = useRouter()
+
   const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     if (disabled) {
       e.preventDefault()
@@ -41,6 +44,12 @@ export function McButton({
     playClick()
     onClick?.()
   }, [disabled, onClick])
+
+  const handleMouseEnter = useCallback(() => {
+    if (disabled || !href) return
+    router.prefetch(href)
+    prefetchAssetsForRoute(href)
+  }, [disabled, href, router])
 
   const buttonClasses = `
     font-minecraft text-[14px] leading-[40px]
@@ -91,6 +100,7 @@ export function McButton({
       <Link
         href={href}
         onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
         target={target}
         className={buttonClasses}
         style={buttonStyles}
@@ -103,6 +113,7 @@ export function McButton({
   return (
     <button
       onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
       disabled={disabled}
       className={buttonClasses}
       style={buttonStyles}
@@ -113,17 +124,11 @@ export function McButton({
 }
 
 export default function MinecraftMenu() {
-  const router = useRouter()
   const [splash, setSplash] = useState('')
 
   useEffect(() => {
     setSplash(SPLASH_TEXTS[Math.floor(Math.random() * SPLASH_TEXTS.length)])
-
-    router.prefetch('/projects')
-    router.prefetch('/contact')
-    router.prefetch('/achievements')
-    router.prefetch('/about')
-  }, [router])
+  }, [])
 
   return (
     <div className='absolute inset-0 z-10 flex flex-col items-center justify-center'>
